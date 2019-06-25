@@ -164,7 +164,7 @@ fmeasure_log = recordlinkage.fscore(confusion_matrix_log)
 ]]></annotation>
 <request type='isc.py.msg.ExecutionRequest' >
 <assign property="callrequest.Code" value='process.GetAnnotation("Logictic regression")' action="set" />
-<assign property="callrequest.Variables" value='"predictions,predictions2,confusion_matrix_log,precision_log,recall_log,fmeasure_log"' action="set" />
+<assign property="callrequest.Variables" value='"predictions,confusion_matrix_log,precision_log,recall_log,fmeasure_log"' action="set" />
 <assign property="callrequest.Serialization" value='"JSON"' action="set" />
 </request>
 <response type='isc.py.msg.ExecutionResponse' >
