@@ -29,6 +29,8 @@ Method OnProcessInput(pInput As %RegisteredObject, Output pOutput As %Registered
 		quit sc
 	}
 	
+	set sc = ##class(ml.engine.CheckData).Add(errors, ..Threshold, maxId - 1000, maxId)
+	
 	if errors>..Threshold {
 		$$$TRACE($$$FormatText("Model errors percent %1 exceed threshold %2", errors, ..Threshold))
 	
