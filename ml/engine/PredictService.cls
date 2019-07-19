@@ -32,28 +32,32 @@ Method OnInit() As %Status
 Method OnProcessInput(pInput As %RegisteredObject, Output pOutput As %RegisteredObject) As %Status
 {
 	#dim sc As %Status = $$$OK
-	set hasNext = ..RS.%Next(.sc)
-	
-	if hasNext=$$$NO {
-		set sc = ..OnInit()
-		quit:$$$ISERR(sc) sc
-		do ..RS.%Next(.sc)
-		quit:$$$ISERR(sc) sc
-	}
-	
-	quit:$$$ISERR(sc) sc
-	
-	set id = ..RS.ID
-	set predReq = ##class(Ens.StringRequest).%New(id)
-	
-	#dim predResp As Ens.StringResponse
-	set sc = ..SendRequestSync(##class(ml.engine.PredictProcess).%ClassName(1), predReq, .predResp)
-	quit:$$$ISERR(sc) sc
-	
-	&sql(UPDATE ml_engine.Data SET prediction=:predResp.StringValue, diff=(state-:predResp.StringValue) WHERE ID = :id)
-	if (SQLCODE'=0) {
-		set sc = $$$ERROR($$$SQLError, SQLCODE, $g(%msg))
+	set count = 0
+	while count<=10 {
+		set count = count + 1
+		set hasNext = ..RS.%Next(.sc)
 		
+		if hasNext=$$$NO {
+			set sc = ..OnInit()
+			quit:$$$ISERR(sc)
+			do ..RS.%Next(.sc)
+			quit:$$$ISERR(sc)
+		}
+		
+		quit:$$$ISERR(sc)
+		
+		set id = ..RS.ID
+		set predReq = ##class(Ens.StringRequest).%New(id)
+		
+		#dim predResp As Ens.StringResponse
+		set sc = ..SendRequestSync(##class(ml.engine.PredictProcess).%ClassName(1), predReq, .predResp)
+		quit:$$$ISERR(sc)
+		
+		&sql(UPDATE ml_engine.Data SET prediction=:predResp.StringValue, diff=(state-:predResp.StringValue) WHERE ID = :id)
+		if (SQLCODE'=0) {
+			set sc = $$$ERROR($$$SQLError, SQLCODE, $g(%msg))
+			
+		}
 	}
 	quit sc
 }
