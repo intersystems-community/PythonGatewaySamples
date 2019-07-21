@@ -12,13 +12,13 @@ Method OnInit() As %Status
 {
 	#dim sc As %Status = $$$OK
 	&sql(UPDATE ml_engine.Data SET prediction=NULL, diff=NULL)
-	if (SQLCODE'=0) {
+	if ((SQLCODE'=0) && (SQLCODE'=100)) {
 		set sc = $$$ERROR($$$SQLError, SQLCODE, $g(%msg))
 		quit sc
 	}
 	
 	&sql(DELETE FROM ml_engine.CheckData)
-	if (SQLCODE'=0) {
+	if ((SQLCODE'=0) && (SQLCODE'=100)) {
 		set sc = $$$ERROR($$$SQLError, SQLCODE, $g(%msg))
 		quit sc
 	}	
