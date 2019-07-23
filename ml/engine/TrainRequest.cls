@@ -1,11 +1,10 @@
+/// Request for Train Process, specifying data used to train the model
 Class ml.engine.TrainRequest Extends Ens.Request
 {
 
 Property StartId As %Integer [ InitialExpression = 1 ];
 
 Property EndId As %Integer [ InitialExpression = 1000 ];
-
-// {$g(^ml.engine.DataD,1)} ];
 
 Storage Default
 {

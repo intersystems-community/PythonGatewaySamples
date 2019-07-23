@@ -1,4 +1,4 @@
-/// 
+/// This is the core process. It trains predictive model from supplied data.
 Class ml.engine.TrainProcess Extends (Ens.BusinessProcessBPL, isc.py.ens.ProcessUtils) [ DependsOn = isc.py.ens.ProcessUtils ]
 {
 
@@ -9,8 +9,10 @@ Property WorkDirectory As %VarString [ InitialExpression = {##class(%File).Norma
 /// Table to get data from
 Property Table As %String(MAXLEN = 1000) [ InitialExpression = "ml_engine.Data" ];
 
+/// List of dataset columns to drop
 Property DropList As %String(MAXLEN = 1000) [ InitialExpression = "['rDate', 'rTime', 'diff', 'prediction', 'state']" ];
 
+/// Target property of the dataset
 Property PropertyY As %String(MAXLEN = 1000) [ InitialExpression = "state" ];
 
 Parameter SETTINGS = "WorkDirectory:Basic,Table:Basic,DropList:Basic,PropertyY:Basic";
@@ -79,6 +81,8 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 
 <call name='Import' target='isc.py.ens.Operation' async='1' xpos='200' ypos='250' >
 <annotation><![CDATA[
+# Import required Python modules
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -131,14 +135,17 @@ del df
 <call name='PCA' target='isc.py.ens.Operation' async='1' xpos='200' ypos='850' >
 <annotation><![CDATA[
 # Scikit-learn PCA
-# Метод главных компонент (англ. principal component analysis, PCA) — один из основных способов уменьшить размерность данных, потеряв наименьшее количество информации. 
+# Principal Component Analysis (PCA) is a dimension-reduction tool that can be used to reduce a large set of variables 
+# to a small set that still contains most of the information in the large set.
+# Principal component analysis (PCA) is a mathematical procedure that transforms a number of (possibly) correlated variables 
+# into a (smaller) number of uncorrelated variables called principal components.
+# The first principal component accounts for as much of the variability in the data as possible, and each succeeding component accounts for as much of the remaining variability as possible
 pca = PCA()
 
 # Scale and transform data to get Principal Components
 X_reduced = pca.fit_transform(scale(X))
 
 # Variance (% cumulative) explained by the principal components
-# Насколько хорошо каждая следующая компонента объясняет вариативность набора данных.
 variance = np.cumsum(np.round(pca.explained_variance_ratio_, decimals=4)*100)
 ]]></annotation>
 <request type='isc.py.msg.ExecutionRequest' >
@@ -150,14 +157,14 @@ variance = np.cumsum(np.round(pca.explained_variance_ratio_, decimals=4)*100)
 <sync name='Wait for PCA' calls='PCA' type='all' xpos='200' ypos='950' />
 <call name='CV' target='isc.py.ens.Operation' async='1' xpos='200' ypos='1050' >
 <annotation><![CDATA[
-# Создаем алгоритм выборки для валидации модели
+# Create mobject that randomly splits dataset into trainig and testing parts for validation
 # 10-fold CV, with shuffle
 kf_10 = KFold(n_splits=10, shuffle=True, random_state=2)
 
-# Создаем объект логистической регрессии
+# Create empty Logistic Regression model
 regr = LogisticRegression()
 
-# Лист среднеквадратических отклонений 
+# List that would contain Mean Square Errors of different models
 mse = []
 
 # Do one CV to get MSE for just the intercept (no principal components in regression)
@@ -181,12 +188,17 @@ for i in np.arange(1,25):
 <sync name='Wait for CV' calls='CV' type='all' xpos='200' ypos='1150' />
 <call name='Fit' target='isc.py.ens.Operation' async='1' xpos='200' ypos='1250' >
 <annotation><![CDATA[
-# Создаем финальную модель
+# Create our pipeline, containig two steps: Principal Components Analysis transformation and Logistic Regression
 pca = PCA()
-pipe = make_pipeline(pca, regr)
+regr = LogisticRegression()
 
-# Тренируем её на наших данных
-pipe.fit(X, Y)
+pipe_temp = make_pipeline(pca, regr)
+
+# Train the pipeline
+pipe_temp.fit(X, Y)
+
+# Switch the pipeline
+pipe = pipe_temp
 ]]></annotation>
 <request type='isc.py.msg.ExecutionRequest' >
 <assign property="callrequest.Code" value="process.GetAnnotation(&quot;Fit&quot;)" action="set" />
@@ -196,6 +208,8 @@ pipe.fit(X, Y)
 <sync name='Wait for Fit' calls='Fit' type='all' xpos='200' ypos='1350' />
 <call name='Plot' target='isc.py.ens.Operation' async='1' xpos='200' ypos='1450' >
 <annotation><![CDATA[
+# Graph MSE variable
+
 fig, (ax1, ax2) = plt.subplots(1,2, figsize=(12,5))
 ax1.plot(mse, '-v')
 ax2.plot(list(range(1, 25)), mse[1:25], '-v')

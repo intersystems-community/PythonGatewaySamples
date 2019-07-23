@@ -1,4 +1,4 @@
-/// 
+/// Process uses trained model to predict one engine state from sensors data
 Class ml.engine.PredictProcess Extends (Ens.BusinessProcessBPL, isc.py.ens.ProcessUtils) [ DependsOn = isc.py.ens.ProcessUtils ]
 {
 
@@ -27,6 +27,7 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 
 <call name='Clean input' target='isc.py.ens.Operation' async='1'>
 <annotation><![CDATA[
+# Dropping unneeded variables from our data row
 X1=X1.drop(columns=#{process.DropList})
 ]]></annotation>
 <request type='isc.py.msg.ExecutionRequest' >
@@ -39,6 +40,8 @@ X1=X1.drop(columns=#{process.DropList})
 
 <call name='Predict' target='isc.py.ens.Operation' async='1'>
 <annotation><![CDATA[
+# Use the pipeline created in Training Process
+
 prediction = pipe.predict(X1)
 ]]></annotation>
 <request type='isc.py.msg.ExecutionRequest' >

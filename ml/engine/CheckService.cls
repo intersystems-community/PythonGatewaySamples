@@ -1,3 +1,4 @@
+/// Service constantly valides model quality and if error rate exceeds Threshold retrains the model.
 Class ml.engine.CheckService Extends Ens.BusinessService
 {
 

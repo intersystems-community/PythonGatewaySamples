@@ -1,3 +1,4 @@
+/// This service gets one new row of data, sends it to PredictProcess and saves prediciton.
 Class ml.engine.PredictService Extends Ens.BusinessService
 {
 
