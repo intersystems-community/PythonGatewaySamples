@@ -14,6 +14,12 @@ XData Cube [ XMLNamespace = "http://www.intersystems.com/deepsee" ]
       </level>
     </hierarchy>
   </dimension>
+  <dimension name="Retraining" disabled="false" hasAll="false" allCaption="All Retraining" allDisplayName="Retraining" type="data" hidden="false" showHierarchies="default">
+    <hierarchy name="H1" disabled="false" hidden="false">
+      <level name="Retraining" disabled="false" sourceProperty="Retraining" list="false" useDisplayValue="true" useAsFilter="true" hidden="false">
+      </level>
+    </hierarchy>
+  </dimension>
   <measure name="Error" disabled="false" sourceProperty="Error" aggregate="AVG" type="number" hidden="false" searchable="false">
   </measure>
   <measure name="Threshold" disabled="false" sourceProperty="Threshold" aggregate="AVG" type="number" hidden="false" searchable="false">
@@ -21,6 +27,8 @@ XData Cube [ XMLNamespace = "http://www.intersystems.com/deepsee" ]
   <measure name="MaxId" disabled="false" sourceProperty="MaxId" aggregate="AVG" type="number" hidden="false" searchable="false">
   </measure>
   <measure name="MinId" disabled="false" sourceProperty="MinId" aggregate="AVG" type="number" hidden="false" searchable="false">
+  </measure>
+  <measure name="Retraining" disabled="false" sourceProperty="Retraining" aggregate="COUNT" type="boolean" hidden="false" searchable="false">
   </measure>
 </cube>
 }

@@ -17,7 +17,7 @@ Property MinId As %Integer;
 Property MaxId As %Integer;
 
 /// Is retraining request sent
-Property Retraining As %Boolean [ Calculated, SqlComputeCode = {set {*} = ({Error} > {Threshold})}, SqlComputeOnChange = %%INSERT ];
+Property Retraining As %Boolean [ SqlComputeCode = {set {*} = ({Error} > {Threshold})}, SqlComputed, SqlComputeOnChange = %%INSERT ];
 
 /// Add record
 /// set sc = ##class(ml.engine.CheckData).Add()
@@ -55,6 +55,9 @@ Storage Default
 </Value>
 <Value name="6">
 <Value>MaxId</Value>
+</Value>
+<Value name="7">
+<Value>Retraining</Value>
 </Value>
 </Data>
 <DataLocation>^ml.engine.CheckDataD</DataLocation>
