@@ -44,8 +44,6 @@ ClassMethod ConfigureProduction() As %Status
 	do EnableDeepSee^%SYS.cspServer(app)
 	do EnableIKnow^%SYS.cspServer(app)
 	
-	set sc = ..PatchBP()
-	
 	quit sc
 }
 
@@ -53,24 +51,26 @@ ClassMethod ConfigureProduction() As %Status
 /// zw ##class(ml.Installer).PatchBP()
 ClassMethod PatchBP()
 {
+	set class = "EnsPortal.BPLEditor"
+	set patch = "<!-- PATCH -->"
+	$$$QuitOnError(##class(%Compiler.UDL.TextServices).GetTextAsString(, class, .code))
+	quit:$find(code, patch) $$$OK 
+		
 	set oldNS = $namespace
 	new $namespace
 	set $namespace = "%SYS"
 	
-	set db = ##class(SYS.Database).%OpenId($zu(12,"enslib"))
+	set db = ##class(SYS.Database).%OpenId($system.Util.ManagerDirectory() _ "enslib")
 	set bk = db.ReadOnly
 	set db.ReadOnly = 0 
 	
 	$$$QuitOnError(db.%Save())
 	
 	set $namespace = oldNS
-	set class = "EnsPortal.BPLEditor"
-	$$$QuitOnError(##class(%Compiler.UDL.TextServices).GetTextAsString(, class, .code))
-	
 	set line = "<textarea id=""aAnnotation"" label=""Annotation"" rows=""3"" cols=""35"" onchange=""zenPage.activityChange(1);"" onkeyup=""zenPage.textControlKeyUp(zenEvent,zenThis);"" onkeydown=""zenPage.textControlKeyDown(zenThis);""/>"
 	set button = "<image src=""deepsee/zoom_16.png"" onclick=""zenPage.editPropertyValue('aAnnotation','code');"" title=""Edit value""/>"
 	
-	set code = $replace(code, line, line _ $$$NL _ button)
+	set code = $replace(code, line, line _ $$$NL _ patch _ button)
 	
 	$$$QuitOnError(##class(%Compiler.UDL.TextServices).SetTextFromString(, class, code))
 	$$$QuitOnError($system.OBJ.Compile(class))

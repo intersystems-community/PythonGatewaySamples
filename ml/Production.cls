@@ -5,7 +5,8 @@ Class ml.Production Extends Ens.Production
 ClassMethod OnStart(pTimeStarted As %String) As %Status
 {
 	set sc = ##class(isc.py.Callout).Setup()
-	quit sc
+	set sc1 = ##class(ml.Installer).PatchBP()
+	quit $$$ADDSC(sc, sc1)
 }
 
 XData ProductionDefinition
