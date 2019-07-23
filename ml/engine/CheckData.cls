@@ -16,6 +16,9 @@ Property MinId As %Integer;
 /// Last id used to determine error 
 Property MaxId As %Integer;
 
+/// Is retraining request sent
+Property Retraining As %Boolean [ Calculated, SqlComputeCode = {set {*} = ({Error} > {Threshold})}, SqlComputeOnChange = %%INSERT ];
+
 /// Add record
 /// set sc = ##class(ml.engine.CheckData).Add()
 ClassMethod Add(Error As %Integer, Threshold As %Integer, MinId As %Integer, MaxId As %Integer) As %Status

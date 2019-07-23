@@ -27,7 +27,7 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 
 <call name='Clean input' target='isc.py.ens.Operation' async='1'>
 <annotation><![CDATA[
-X1=X1.drop(columns=['rDate', 'rTime', 'diff', 'prediction', 'state'])
+X1=X1.drop(columns=#{process.DropList})
 ]]></annotation>
 <request type='isc.py.msg.ExecutionRequest' >
 <assign property="callrequest.Code" value='process.GetAnnotation("Clean input")' action="set" />
