@@ -61,7 +61,7 @@ ClassMethod PatchBP()
 	$$$QuitOnError(db.%Save())
 	
 	set class = "EnsPortal.BPLEditor"
-	$$$QuitOnError(##class(%Compiler.UDL.TextServices).GetTextFromString(, class, .code))
+	$$$QuitOnError(##class(%Compiler.UDL.TextServices).GetTextAsString(, class, .code))
 	
 	set line = "<textarea id=""aAnnotation"" label=""Annotation"" rows=""3"" cols=""35"" onchange=""zenPage.activityChange(1);"" onkeyup=""zenPage.textControlKeyUp(zenEvent,zenThis);"" onkeydown=""zenPage.textControlKeyDown(zenThis);""/>"
 	set button = "<image src=""deepsee/zoom_16.png"" onclick=""zenPage.editPropertyValue('aAnnotation','code');"" title=""Edit value""/>"
