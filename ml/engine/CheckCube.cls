@@ -28,7 +28,7 @@ XData Cube [ XMLNamespace = "http://www.intersystems.com/deepsee" ]
   </measure>
   <measure name="MinId" disabled="false" sourceProperty="MinId" aggregate="AVG" type="number" hidden="false" searchable="false">
   </measure>
-  <measure name="Retraining" disabled="false" sourceProperty="Retraining" aggregate="COUNT" type="boolean" hidden="false" searchable="false">
+  <measure name="Retraining" disabled="false" sourceProperty="Retraining" aggregate="AVG" type="integer" hidden="false" searchable="false">
   </measure>
 </cube>
 }
