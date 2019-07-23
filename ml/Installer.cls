@@ -49,8 +49,11 @@ ClassMethod ConfigureProduction() As %Status
 	quit sc
 }
 
+/// Add magnifying glass to Annotation
+/// zw ##class(ml.Installer).PatchBP()
 ClassMethod PatchBP()
 {
+	set oldNS = $namespace
 	new $namespace
 	set $namespace = "%SYS"
 	
@@ -60,6 +63,7 @@ ClassMethod PatchBP()
 	
 	$$$QuitOnError(db.%Save())
 	
+	set $namespace = oldNS
 	set class = "EnsPortal.BPLEditor"
 	$$$QuitOnError(##class(%Compiler.UDL.TextServices).GetTextAsString(, class, .code))
 	
@@ -70,6 +74,8 @@ ClassMethod PatchBP()
 	
 	$$$QuitOnError(##class(%Compiler.UDL.TextServices).SetTextFromString(, class, code))
 	$$$QuitOnError($system.OBJ.Compile(class))
+	
+	set $namespace = "%SYS"
 	
 	set db.ReadOnly = bk 
 	quit db.%Save()
