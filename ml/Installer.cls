@@ -44,7 +44,35 @@ ClassMethod ConfigureProduction() As %Status
 	do EnableDeepSee^%SYS.cspServer(app)
 	do EnableIKnow^%SYS.cspServer(app)
 	
+	set sc = ..PatchBP()
+	
 	quit sc
+}
+
+ClassMethod PatchBP()
+{
+	new $namespace
+	set $namespace = "%SYS"
+	
+	set db = ##class(SYS.Database).%OpenId($zu(12,"enslib"))
+	set bk = db.ReadOnly
+	set db.ReadOnly = 0 
+	
+	$$$QuitOnError(db.%Save())
+	
+	set class = "EnsPortal.BPLEditor"
+	$$$QuitOnError(##class(%Compiler.UDL.TextServices).GetTextFromString(, class, .code))
+	
+	set line = "<textarea id=""aAnnotation"" label=""Annotation"" rows=""3"" cols=""35"" onchange=""zenPage.activityChange(1);"" onkeyup=""zenPage.textControlKeyUp(zenEvent,zenThis);"" onkeydown=""zenPage.textControlKeyDown(zenThis);""/>"
+	set button = "<image src=""deepsee/zoom_16.png"" onclick=""zenPage.editPropertyValue('aAnnotation','code');"" title=""Edit value""/>"
+	
+	set code = $replace(code, line, line _ $$$NL _ button)
+	
+	$$$QuitOnError(##class(%Compiler.UDL.TextServices).SetTextFromString(, class, code))
+	$$$QuitOnError($system.OBJ.Compile(class))
+	
+	set db.ReadOnly = bk 
+	quit db.%Save()
 }
 
 }
