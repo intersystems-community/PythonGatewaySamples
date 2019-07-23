@@ -19,7 +19,7 @@ XData ProductionDefinition
   <Item Name="isc.py.ens.Operation" Category="Engine,Match" ClassName="isc.py.ens.Operation" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
     <Setting Target="Host" Name="PythonLib">libpython3.6m.so</Setting>
   </Item>
-  <Item Name="ml.engine.CheckService" Category="Engine" ClassName="ml.engine.CheckService" PoolSize="1" Enabled="false" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
+  <Item Name="ml.engine.CheckService" Category="Engine" ClassName="ml.engine.CheckService" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
     <Setting Target="Adapter" Name="CallInterval">60</Setting>
   </Item>
   <Item Name="ml.engine.PredictService" Category="Engine" ClassName="ml.engine.PredictService" PoolSize="1" Enabled="false" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
