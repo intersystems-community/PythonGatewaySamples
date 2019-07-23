@@ -7,6 +7,8 @@ Property Adapter As Ens.InboundAdapter;
 
 Property RS As %SQL.ISelectResult;
 
+Property AtEnd As %Boolean [ InitialExpression = {$$$NO} ];
+
 /// This user callback method is called via initConfig() from %OnNew() or in the case of SOAP Services from OnPreSOAP()
 Method OnInit() As %Status
 {
@@ -32,16 +34,20 @@ Method OnInit() As %Status
 Method OnProcessInput(pInput As %RegisteredObject, Output pOutput As %RegisteredObject) As %Status
 {
 	#dim sc As %Status = $$$OK
+	quit:..AtEnd sc
+	
 	set count = 0
 	while count<=10 {
 		set count = count + 1
 		set hasNext = ..RS.%Next(.sc)
 		
 		if hasNext=$$$NO {
-			set sc = ..OnInit()
+			set ..AtEnd = $$$YES
+			quit
+			/*set sc = ..OnInit()
 			quit:$$$ISERR(sc)
 			do ..RS.%Next(.sc)
-			quit:$$$ISERR(sc)
+			quit:$$$ISERR(sc)*/
 		}
 		
 		quit:$$$ISERR(sc)
