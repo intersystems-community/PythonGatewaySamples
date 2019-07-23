@@ -19,7 +19,7 @@ XData ProductionDefinition
     <Setting Target="Host" Name="PythonLib">libpython3.6m.so</Setting>
   </Item>
   <Item Name="ml.engine.CheckService" Category="Engine" ClassName="ml.engine.CheckService" PoolSize="1" Enabled="false" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
-    <Setting Target="Adapter" Name="CallInterval">15</Setting>
+    <Setting Target="Adapter" Name="CallInterval">60</Setting>
   </Item>
   <Item Name="ml.engine.PredictService" Category="Engine" ClassName="ml.engine.PredictService" PoolSize="1" Enabled="false" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
     <Setting Target="Adapter" Name="CallInterval">.1</Setting>
