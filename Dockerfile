@@ -11,6 +11,7 @@ ENV SRC_DIR=/tmp/src
 COPY . $SRC_DIR
 
 COPY index.html $ISC_PACKAGE_INSTALLDIR/csp/user/index.html
+COPY Engine.md $ISC_PACKAGE_INSTALLDIR/csp/user/Engine.md
 ADD https://strapdownjs.com/v/0.2/themes/united.min.css $ISC_PACKAGE_INSTALLDIR/csp/user/united.min.css
 ADD https://cdn.jsdelivr.net/npm/marked/marked.min.js $ISC_PACKAGE_INSTALLDIR/csp/user/marked.min.js
 
