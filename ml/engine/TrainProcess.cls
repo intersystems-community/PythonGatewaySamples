@@ -190,7 +190,6 @@ for i in np.arange(1,25):
 <annotation><![CDATA[
 # Create our pipeline, containig two steps: Principal Components Analysis transformation and Logistic Regression
 pca = PCA()
-regr = LogisticRegression()
 
 pipe_temp = make_pipeline(pca, regr)
 
