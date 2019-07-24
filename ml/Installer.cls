@@ -38,12 +38,34 @@ ClassMethod ConfigureProduction() As %Status
 		set ^EnsPortal.Settings(user, "PreferredCategory", production)="Engine"
 	}
 	
-	set sc = ##class(Ens.Director).SetAutoStart(production)
+	$$$QuitOnError(##class(Ens.Director).SetAutoStart(production))
 	
 	set app = "/csp/python/"
 	do EnableDeepSee^%SYS.cspServer(app)
 	do EnableIKnow^%SYS.cspServer(app)
 	
+	set sc = ..ConfigureProcess()
+	
+	quit sc
+}
+
+/// Save TrainProcess Data to /csp/user directory
+ClassMethod ConfigureProcess() As %Status
+{
+	#dim sc As %Status = $$$OK
+	set production = "ml.Production"
+	set process = "ml.engine.TrainProcess"
+	
+	set setting = ##class(Ens.Config.Setting).%New()
+	set setting.Name = "WorkDirectory"
+	set setting.Target = "Host"
+	set setting.Value = ##class(%File).SubDirectoryName(##class(%File).SubDirectoryName($System.Util.InstallDirectory(),"csp", 1), "user", 1)
+
+
+	set exists = ##class(Ens.Config.Item).NameExists(production, process, .itemId)
+	set item =  ##class(Ens.Config.Item).%OpenId(itemId)
+	do item.Settings.Insert(setting)
+	set sc = item.%Save()	
 	quit sc
 }
 
