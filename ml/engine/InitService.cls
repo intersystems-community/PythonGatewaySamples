@@ -14,6 +14,8 @@ $$$OK
 /// This user callback method is called via initConfig() from %OnNew() or in the case of SOAP Services from OnPreSOAP()
 Method OnInit() As %Status
 {
+	// We're inside the container. Let's wait a little.
+	hang:$system.Util.GetEnviron("ISC_PACKAGE_INSTALLDIR")="/usr/irissys" 60
 	$$$TRACE("INIT")
 	set trainReq = ##class(ml.engine.TrainRequest).%New()
 	set trainReq.EndId = 1000
