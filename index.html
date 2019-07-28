@@ -6,13 +6,14 @@
   <link href="united.min.css" rel="stylesheet">
 </head>
 <body>
-  <div id="content"></div>
+  <div id="content" style="width: 80%; margin: 0 auto;"></div>
   <script src="marked.min.js"></script>
   <script>
   xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
         document.getElementById("content").innerHTML = marked(xmlhttp.responseText);
+        document.querySelectorAll("a").forEach(function(a) { a.target = "_blank"; }); // Open lenks on new page.
     }
   }
   xmlhttp.open("GET", "Engine.md", true);
