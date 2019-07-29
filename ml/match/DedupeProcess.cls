@@ -17,7 +17,7 @@ Property Fields As %VarString [ InitialExpression = "ml.match.Restaurant" ];
 /// If not specified default query in BPL would be used
 Property Query As %VarString;
 
-Parameter SETTINGS = "TrainingSize:Basic,SettingsFile:Basic,Fields:Basic,Query:Basic";
+Parameter SETTINGS = "TrainingSize:ML,SettingsFile:ML,Fields:ML,Query:ML";
 
 Method GetFields()
 {

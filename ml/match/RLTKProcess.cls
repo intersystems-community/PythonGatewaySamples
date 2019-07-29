@@ -10,7 +10,7 @@ Property Query As %VarString;
 /// If not specified default query in BPL would be used
 Property TrueQuery As %VarString;
 
-Parameter SETTINGS = "Query:Basic";
+Parameter SETTINGS = "Query:ML,TrueQuery:ML";
 
 /// BPL Definition
 XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]

@@ -12,7 +12,7 @@ Property Threshold As %Integer(MAXVAL = 100, MINVAL = 1) [ InitialExpression = 2
 /// Number of rows used to retrain the model
 Property RowCount As %Integer(MINVAL = 100) [ InitialExpression = 1000 ];
 
-Parameter SETTINGS = "Threshold:Basic";
+Parameter SETTINGS = "Threshold:ML,RowCount:ML";
 
 Method OnProcessInput(pInput As %RegisteredObject, Output pOutput As %RegisteredObject) As %Status
 {

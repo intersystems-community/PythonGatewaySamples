@@ -2,12 +2,14 @@
 Class ml.engine.PredictProcess Extends (Ens.BusinessProcessBPL, isc.py.ens.ProcessUtils) [ DependsOn = isc.py.ens.ProcessUtils ]
 {
 
-/// Table to get data from
+/// Table to get the data from
 Property Table As %String(MAXLEN = 1000) [ InitialExpression = "ml_engine.Data" ];
 
+/// List of properties to drop from the dataset
+/// Format: ['prop1', 'prop2', ..., 'propN']
 Property DropList As %String(MAXLEN = 1000) [ InitialExpression = "['rDate', 'rTime', 'diff', 'prediction', 'state']" ];
 
-Parameter SETTINGS = "WorkDirectory:Basic,Table:Basic,DropList:Basic";
+Parameter SETTINGS = "Table:ML,DropList:ML";
 
 /// BPL Definition
 XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]

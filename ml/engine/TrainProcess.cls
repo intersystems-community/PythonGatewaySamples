@@ -6,16 +6,17 @@ Class ml.engine.TrainProcess Extends (Ens.BusinessProcessBPL, isc.py.ens.Process
 /// Refer to this property from process proper with #{process.WorkDirectory}
 Property WorkDirectory As %VarString [ InitialExpression = {##class(%File).NormalizeDirectory(##class(%SYS.System).TempDirectory())} ];
 
-/// Table to get data from
+/// Table to get the data from
 Property Table As %String(MAXLEN = 1000) [ InitialExpression = "ml_engine.Data" ];
 
 /// List of dataset columns to drop
+/// Format: ['prop1', 'prop2', ..., 'propN']
 Property DropList As %String(MAXLEN = 1000) [ InitialExpression = "['rDate', 'rTime', 'diff', 'prediction', 'state']" ];
 
 /// Target property of the dataset
 Property PropertyY As %String(MAXLEN = 1000) [ InitialExpression = "state" ];
 
-Parameter SETTINGS = "WorkDirectory:Basic,Table:Basic,DropList:Basic,PropertyY:Basic";
+Parameter SETTINGS = "WorkDirectory:ML,Table:ML,DropList:ML,PropertyY:ML";
 
 XData EmptyCall
 {
