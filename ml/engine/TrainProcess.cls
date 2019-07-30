@@ -158,7 +158,7 @@ variance = np.cumsum(np.round(pca.explained_variance_ratio_, decimals=4)*100)
 <sync name='Wait for PCA' calls='PCA' type='all' xpos='200' ypos='950' />
 <call name='CV' target='isc.py.ens.Operation' async='1' xpos='200' ypos='1050' >
 <annotation><![CDATA[
-# Create object that randomly splits dataset into trainig and testing parts for validation
+# Create object that randomly splits dataset into training and testing parts for validation
 # 10-fold CV, with shuffle
 kf_10 = KFold(n_splits=10, shuffle=True, random_state=2)
 
