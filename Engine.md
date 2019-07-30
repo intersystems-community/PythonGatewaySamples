@@ -173,7 +173,7 @@ pca = PCA(n_components = 1 + mse.index(min(mse[1:])))
 
 It would use not a complete set of principal components, but a subset of them, which yielded the best `mse` result.
 To clarify:
-- `mse[1:]` - returns a subset of `mse` list with mean square errors for each number of principal components.
+- `mse[1:]` - returns a subset of `mse` list with mean squared errors for each number of principal components.
 - `min(list)` gets the minimal value from `mse` list.
 - `mse.index(value)` returns the position (zero based) of the `value` in `mse` list which turns out to be exactly the number of principal components we need minus one as the list is zero based.
 - Finally, we're creating a new [PCA](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html) object specifying `n_components` argument - number of components to keep. If `n_components` is not set all components are kept.
@@ -219,9 +219,14 @@ In this Experience, we saw how automated AI/ML pipeline works in InterSystems IR
 - [Presentation](!!!)
 - [PythonGateway](https://openexchange.intersystems.com/package/PythonGateway)
 - [RGateway](https://openexchange.intersystems.com/package/RGateway)
-- [PythonGateway Samples](https://github.com/intersystems-community/PythonGatewaySamples) - contains code for this experience and more
+- [PythonGateway Samples](https://github.com/intersystems-community/PythonGatewaySamples) - contains the code for this experience and more
 - To access MLToolkit write to [MLToolkit@intersystems.com](mailto:MLToolkit@intersystems.com?subject=MLToolkit%20user%20group&body=Hello.%0A%0APlease%20add%20me%20to%20ML%20Toolkit%20user%20group%3A%0A%0A-%20GitHub%20username%3A%20%0A%0A-%20Name%3A%20%0A%0A-%20Company%3A%20%0A%0A-%20Position%3A%0A-%20Country%3A%20%0A%0A)
 
+## Related sessions
+
+Don't forget to visit these sesions on the topics of AI/ML:
+
+- !!!
 
 ## Reproducing the experience
 
