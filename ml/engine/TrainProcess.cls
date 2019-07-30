@@ -118,7 +118,7 @@ sns.set_style('darkgrid')
 <sync name='Wait for Load Data' calls='Load Data' type='any' xpos='200' ypos='550' />
 <call name='Extract Y' target='isc.py.ens.Operation' async='1' xpos='200' ypos='650' >
 <annotation><![CDATA[
-# df is set in 'Load Data' step
+# df is set in the 'Load Data' step
 
 # Extracting target variable Y
 Y=df.#{process.PropertyY} 
@@ -158,14 +158,14 @@ variance = np.cumsum(np.round(pca.explained_variance_ratio_, decimals=4)*100)
 <sync name='Wait for PCA' calls='PCA' type='all' xpos='200' ypos='950' />
 <call name='CV' target='isc.py.ens.Operation' async='1' xpos='200' ypos='1050' >
 <annotation><![CDATA[
-# Create mobject that randomly splits dataset into trainig and testing parts for validation
+# Create object that randomly splits dataset into trainig and testing parts for validation
 # 10-fold CV, with shuffle
 kf_10 = KFold(n_splits=10, shuffle=True, random_state=2)
 
 # Create empty Logistic Regression model
 regr = LogisticRegression()
 
-# List that would contain Mean Square Errors of different models
+# List that would contain Mean Squared Errors of different models
 mse = []
 
 # Do one CV to get MSE for just the intercept (no principal components in regression)
@@ -174,7 +174,7 @@ n = len(X_reduced)
 score = -1*cross_val_score(regr, np.ones((n,1)), Y.ravel(), cv=kf_10, scoring='neg_mean_squared_error').mean()    
 mse.append(score)
 
-# Do CV for the 25 principle components, adding one component to the regression at the time
+# Do CV for a set of 1 to 25 principal components, adding one component to the regression at the time
 for i in np.arange(1,25):
     score = -1*cross_val_score(regr, X_reduced[:,:i], Y.ravel(), cv=kf_10, scoring='neg_mean_squared_error').mean()
     mse.append(score)
@@ -191,13 +191,12 @@ for i in np.arange(1,25):
 <annotation><![CDATA[
 # Create our pipeline, containig two steps: Principal Components Analysis transformation and Logistic Regression
 pca = PCA()
-
 pipe_temp = make_pipeline(pca, regr)
 
 # Train the pipeline
 pipe_temp.fit(X, Y)
 
-# Switch the pipeline
+# Switch the pipelines
 pipe = pipe_temp
 ]]></annotation>
 <request type='isc.py.msg.ExecutionRequest' >
