@@ -44,7 +44,7 @@ Method OnProcessInput(pInput As %RegisteredObject, Output pOutput As %Registered
 	set sc = ##class(ml.engine.CheckData).Add(errors, ..Threshold, minId, maxId)
 	
 	if errors>..Threshold {
-		$$$TRACE($$$FormatText("Model errors percent %1 exceed threshold %2", errors, ..Threshold))
+		$$$TRACE($$$FormatText("Model error percentage: %1 exceeds threshold %2", errors, ..Threshold))
 	
 		set trainReq = ##class(ml.engine.TrainRequest).%New()
 		set trainReq.EndId = maxId

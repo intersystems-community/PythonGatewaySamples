@@ -78,7 +78,9 @@ XData BPL [ XMLNamespace = "http://www.intersystems.com/bpl" ]
 <property name='EndId' type='%Integer' initialexpression='$g(^ml.engine.DataD,1)' instantiate='0' />
 </context>
 <sequence xend='200' yend='1650' >
-<assign name="Check state values" property="status" value="process.HasDistinctStates(request.StartId, request.EndId, process.Table)"/>
+<assign name="Check state values" property="status" value="process.HasDistinctStates(request.StartId, request.EndId, process.Table)">
+<annotation>Check that potential dataset has at least two distinct Y values</annotation>
+</assign>
 
 <call name='Import' target='isc.py.ens.Operation' async='1' xpos='200' ypos='250' >
 <annotation><![CDATA[
