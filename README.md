@@ -39,27 +39,27 @@ We start with working self-correcting model used for predictive maintenance. Fir
 
  ### Walkthrough 
 
-We want to do predictive maintenance on engines. Dataset: we store information about one specific engine. We get a large array of sensor data every second. Historic data is already in the dataset. 
+We want to do predictive maintenance on engines. Dataset: we store information about one specific engine. We get a large array of sensor data every second. Historic data is already in the dataset. Check [Engine.md](Engines.md) for a step-by-step walkthrough. Note that GitHub does not render base64 embedded images, so you'll need a separate markdown viewer.
+
 
 ### Production
 
-- Python Operation: operation to execute Python code
-- Train process: trains new model
-- Predict Process: predicts maintenance value and returns it using model from `Train Process`
-- Init Service: trais initial model via `Train process`
-- Predict Service: once a second the service sends information about engine to `Predict Process`
-- Check Service: checks quality of the model latest predictions
+- `py.ens.Operation` – executes Python code and sends back the results.
+- `ml.engine.TrainProcess` – trains a new prediction model.
+- `ml.engine.PredictService` – a service that receives information from engine sensors and sends it to ml.engine.PredictProcess to predict engine state. At the moment it is disabled (grey) and does not transfer data.
+- `ml.engine.PredictProcess` - uses the ML model to predict engine state.
+- `ml.engine.CheckService` – regularly checks the accuracy of the ML model. If the prediction error rate is above the threshold, the service sends a request to the `ml.engine.TrainProcess` to update the model.
+- `ml.engine.InitService` – sends a request to the `ml.engine.TrainProcess` to train the initial model at production start.
 
 Start `Predict Service` and `Check Service` to see model be automatically retrained when prediction quality drops.
 
  ### Predict Process walkthrough 
         
-- Import – load Python libraries
-- Load Data – load data for model trainig
-- Extract Y – separate data into X (sensor data) and Y (engine state)
-- PCA – principal components calculation
-- CV – potential models cross-validation
-- Fit – creating a pipeline
-
+- Import - load Python libraries
+- Load Data - load the data for model training
+- Extract Y - split the data into X - the independent variables and Y - the dependent variable we are predicting
+- PCA - The [principal components](https://towardsdatascience.com/a-step-by-step-explanation-of-principal-component-analysis-b836fb9c97e2) calculation for X
+- CV - [cross-validation](https://machinelearningmastery.com/k-fold-cross-validation/) of potential models
+- Fit - [pipeline](https://www.kaggle.com/baghern/a-deep-dive-into-sklearn-pipelines) creation and training
 
 
