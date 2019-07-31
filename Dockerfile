@@ -1,23 +1,25 @@
-FROM intersystemscommunity/irispy:latest
+FROM intersystemscommunity/irispy:193
+
+USER root
 
 RUN pip install sklearn
 
-RUN mkdir -p /tmp/deps \
- && cd /tmp/deps \
- && wget -q https://pm.community.intersystems.com/packages/zpm/latest/installer -O zpm.xml
+USER irisowner
 
-ENV SRC_DIR=/tmp/src
+ENV SRC_DIR=/home/irisowner
 
-COPY . $SRC_DIR
+RUN wget -q https://pm.community.intersystems.com/packages/zpm/latest/installer -O $SRC_DIR/zpm.xml
 
-COPY --chown=irisusr:irisusr index.html $ISC_PACKAGE_INSTALLDIR/csp/user/index.html
-COPY --chown=irisusr:irisusr Engine.md $ISC_PACKAGE_INSTALLDIR/csp/user/Engine.md
-ADD --chown=irisusr:irisusr https://strapdownjs.com/v/0.2/themes/united.min.css $ISC_PACKAGE_INSTALLDIR/csp/user/united.min.css
-ADD --chown=irisusr:irisusr https://cdn.jsdelivr.net/npm/marked/marked.min.js $ISC_PACKAGE_INSTALLDIR/csp/user/marked.min.js
+COPY --chown=irisowner . $SRC_DIR
 
+COPY --chown=irisuser index.html $ISC_PACKAGE_INSTALLDIR/csp/user/index.html
+COPY --chown=irisuser Engine.md $ISC_PACKAGE_INSTALLDIR/csp/user/Engine.md
+ADD --chown=irisuser https://strapdownjs.com/v/0.2/themes/united.min.css $ISC_PACKAGE_INSTALLDIR/csp/user/united.min.css
+ADD --chown=irisuser https://cdn.jsdelivr.net/npm/marked/marked.min.js $ISC_PACKAGE_INSTALLDIR/csp/user/marked.min.js
 
 RUN iris start $ISC_PACKAGE_INSTANCENAME && \
-    /bin/echo -e " do \$system.OBJ.Load(\"/tmp/deps/zpm.xml\", \"ck\")" \
+    /bin/echo -e " do \$system.OBJ.Load(\"$SRC_DIR/zpm.xml\", \"ck\")" \
+            " do ##class(%File).Delete(\"$SRC_DIR/zpm.xml\")" \
             " zn \"PYTHON\"" \
             " do \$system.OBJ.ImportDir(\"$SRC_DIR/ml\", \"*.cls\", \"ck\", , 1)" \
             " do \$system.OBJ.ImportDir(\"$SRC_DIR/\", \"*.xml\", \"ck\")" \
@@ -32,4 +34,6 @@ RUN iris start $ISC_PACKAGE_INSTANCENAME && \
   && rm -f $ISC_PACKAGE_INSTALLDIR/mgr/alerts.log \
   && rm -f $ISC_PACKAGE_INSTALLDIR/mgr/journal/* \
   && rm -f $ISC_PACKAGE_INSTALLDIR/mgr/messages.log \
-  && rm -rf $SRC_DIR
+  && rm -rf $SRC_DIR/ml \
+  && rm -rf $SRC_DIR/.git \
+  && rm -f $SRC_DIR/*.* $SRC_DIR/Dockerfile $SRC_DIR/LICENSE
