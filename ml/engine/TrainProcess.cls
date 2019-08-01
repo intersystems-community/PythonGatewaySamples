@@ -95,12 +95,8 @@ from sklearn.decomposition import PCA
 from sklearn.model_selection import KFold
 from sklearn.model_selection import cross_validate
 from sklearn.model_selection import cross_val_score
-from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import make_pipeline
-
-import seaborn as sns
-sns.set_style('darkgrid')
 ]]></annotation>
 <request type='isc.py.msg.ExecutionRequest' >
 <assign property="callrequest.Code" value="process.GetAnnotation(&quot;Import&quot;)" action="set" />
