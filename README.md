@@ -11,7 +11,7 @@ Examples of [PythonGateway](https://github.com/intersystems-community/PythonGate
 
 1. Install [PythonGateway](https://github.com/intersystems-community/PythonGateway).
 2. Load ObjectScript code (i.e. `do $system.OBJ.ImportDir("C:\InterSystems\Repos\PythongatewaySamples\","*.cls,*.xml","c",,1)`) into Production (Ensemble-enabled) namespace. In case you want to Production-enable namespace call: `write ##class(%EnsembleMgr).EnableNamespace($Namespace, 1)`.
-3. Load restraunt data with: `do ##class(ml.match.Restaurant).Import()`.
+3. Load restaurant data with: `do ##class(ml.match.Restaurant).Import()`.
 4. Install these libraries:
 
 ```
