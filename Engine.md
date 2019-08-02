@@ -35,9 +35,9 @@ On this page you will see the main components of the AI/ML production:
 
 - `py.ens.Operation` – executes Python code and sends back the results.
 - `ml.engine.TrainProcess` – trains a new prediction model.
-- `ml.engine.PredictService` – a service that receives information from engine sensors and sends it to ml.engine.PredictProcess to predict engine state. At the moment it is disabled (grey) and does not transfer data.
-- `ml.engine.PredictProcess` - uses the ML model to predict engine state.
-- `ml.engine.CheckService` – regularly checks the accuracy of the ML model. If the prediction error rate is above the threshold, the service sends a request to the `ml.engine.TrainProcess` to update the model.
+- `ml.engine.PredictService` – a service that receives information from engine sensors and sends it to `ml.engine.PredictProcess` to predict engine state. At the moment `ml.engine.PredictService` is disabled (grey) and does not transfer data.
+- `ml.engine.PredictProcess` - uses the ML model created by `ml.engine.TrainProcess` to predict engine state.
+- `ml.engine.CheckService` – regularly checks the accuracy of the ML model by comparing predictions and real engine state. If the prediction error rate is above the threshold, the service sends a request to the `ml.engine.TrainProcess` to update the model.
 - `ml.engine.InitService` – sends a request to the `ml.engine.TrainProcess` to train the initial model at production start.
 
 Each business host has relevant settings under `ML` category.
