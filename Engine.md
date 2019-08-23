@@ -263,7 +263,19 @@ Additionally we demonstrated that InterSystems IRIS:
 
 Don't forget to visit these sesions on the topics of AI/ML:
 
-- !!!
+- BI and Analytics Roadmap (Mon 14:30)
+- AI & ML Roundtable (Mon 15:30)
+- NLP in Healthcare – Real-world Use Cases (Mon 16:30)
+- Rapid Intelligent Application Development (Tue 14:30)
+- An ML Toolkit for InterSystems IRIS (Tue 13:30)
+- Introducing Analytic Workflows (Tue 16:30)
+- Bright Colors & Predictive Maintenance (Wed 12:00)
+
+Recordings of these sessions would be available at [learning.intersystems.com](https://learning.intersystems.com).
+
+## Related Experience
+
+Don't forget to visit "Using AI Services to Build Intelligent Applications" experience at Mon 16:30 or Tue 16:30. 
 
 ## Reproducing the experience
 
