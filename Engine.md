@@ -253,7 +253,7 @@ Additionally we demonstrated that InterSystems IRIS:
 
 ## Links
 
-- [Presentation](!!!)
+- [Presentation](http://meter.eduard.win/MLTExperience.pdf)
 - [PythonGateway](https://openexchange.intersystems.com/package/PythonGateway)
 - [RGateway](https://openexchange.intersystems.com/package/RGateway)
 - [PythonGateway Samples](https://github.com/intersystems-community/PythonGatewaySamples) – contains the code for this Experience and more
@@ -271,7 +271,7 @@ Don't forget to visit these sesions on the topics of AI/ML:
 - Introducing Analytic Workflows (Tue 16:30)
 - Bright Colors & Predictive Maintenance (Wed 12:00)
 
-Recordings of these sessions would be available at [learning.intersystems.com](https://learning.intersystems.com).
+Recordings of these sessions would be available on [learning.intersystems.com](https://learning.intersystems.com).
 
 ## Related Experience
 
