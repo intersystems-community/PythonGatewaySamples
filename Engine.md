@@ -56,7 +56,7 @@ Let's start with model validation. `ml.engine.CheckService` regularly verifies t
 ### Steps
 
 1. On the [Production Management page](/csp/python/EnsPortal.ProductionConfig.zen) click `ml.engine.CheckService`. 
-2. Click `Log in` on the menu on the right. 
+2. Click `Log` on the menu on the right. 
 
 You will see the results of model validation displayed there.
 
