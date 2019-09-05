@@ -167,9 +167,9 @@ All the activities beginning with the word Wait are used to get results from asy
 - Import - Load Python libraries.
 - Load Data - Load the data for model training.
 - Extract Y - Split the data into X (the independent variables) and Y (the dependent variable we are predicting).
-- PCA - The [principal components](https://towardsdatascience.com/a-step-by-step-explanation-of-principal-component-analysis-b836fb9c97e2) calculation for X.
-- CV - [Cross-validation](https://machinelearningmastery.com/k-fold-cross-validation/) of potential models.
-- Fit - [Pipeline](https://www.kaggle.com/baghern/a-deep-dive-into-sklearn-pipelines) creation and training.
+- PCA - The [principal components](https://stats.stackexchange.com/a/140579/249178) calculation for X - technique used to emphasize variation and bring out strong patterns in a dataset. It's often used to make data easy to explore and visualize.
+- CV - [Cross-validation](https://machinelearningmastery.com/k-fold-cross-validation/) of potential models. It is a group of model validation techniques for assessing how the results of a statistical analysis will generalize to an independent data set. It is mainly used in settings where the goal is prediction, and one wants to estimate how accurately a predictive model will perform in practice.
+- Fit - [Pipeline](https://www.kaggle.com/baghern/a-deep-dive-into-sklearn-pipelines) creation and training. Pipeline is a series of steps we take from source data to prediction. In or case there are two steps: PCA and Logistic Regression.
 
 Annotations contain a more detailed description of activities and an explanation of their behaviors, alongside the Python code executed by `isc.py.ens.Operation`.
 
