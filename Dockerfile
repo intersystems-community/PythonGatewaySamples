@@ -1,4 +1,4 @@
-FROM intersystemscommunity/irispy:193
+FROM intersystemscommunity/irispy:latest
 
 USER root
 
