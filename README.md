@@ -12,7 +12,8 @@ Examples of [PythonGateway](https://github.com/intersystems-community/PythonGate
 1. Install [PythonGateway](https://github.com/intersystems-community/PythonGateway).
 2. Load ObjectScript code (i.e. `do $system.OBJ.ImportDir("C:\InterSystems\Repos\PythongatewaySamples\","*.cls","c",,1)`) into Production (Ensemble-enabled) namespace. In case you want to Production-enable namespace call: `write ##class(%EnsembleMgr).EnableNamespace($Namespace, 1)`.
 3. Load restaurant data with: `do ##class(ml.match.Restaurant).Import()`.
-4. Install these libraries:
+4. Load match data with: `do $system.OBJ.ImportDir("C:\InterSystems\Repos\PythongatewaySamples\","*.xml","c")`
+5. Install these libraries:
 
 ```
 pip install recordlinkage
@@ -23,7 +24,7 @@ pip install matplotlib
 pip install sklearn
 pip install seaborn
 ```
-5. Open and start `ml.Production`.
+6. Open and start `ml.Production`.
 
 # Samples
 
