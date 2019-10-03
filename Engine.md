@@ -13,8 +13,6 @@
 - [Exercise 8. Further model improvements](#exercise-8-further-model-improvements-↑)
 - [Summary](#summary-↑)
 - [Links](#links-↑)
-- [Related Sessions](#related-sessions-↑)
-- [Related Experience](#related-experience-↑)
 - [Reproducing the experience](#reproducing-the-experience-↑)
 - [Python](#python-↑)
 
@@ -139,6 +137,8 @@ In the screenshot, you can see that at the beginning there are no predictions to
 
 
 ## Exercise 4. Explore ml.engine.TrainProcess [↑](#contents)
+
+Before we continue, if you want to refresh your knowledge of [Principal Component Analysis](https://en.wikipedia.org/wiki/Principal_component_analysis) and [Logistic Regression](https://en.wikipedia.org/wiki/Logistic_regression) watch this [video](https://learning.intersystems.com/course/view.php?id=1182#section-1).
 
 Now let's move to the heart of our AI/ML production: `ml.engine.TrainProcess`. It is the core process of this Experience, as it trains a new predictive model from supplied data.
 In this exercise you'll explore activities composing `ml.engine.TrainProcess`. They contain Python code (which is sent to `isc.py.ens.Operation` for execution). Don't worry if you're not very familiar with Python. 
@@ -304,27 +304,6 @@ Additionally we demonstrated that InterSystems IRIS:
 - [RGateway](https://openexchange.intersystems.com/package/RGateway)
 - [PythonGateway Samples](https://github.com/intersystems-community/PythonGatewaySamples) – contains the code for this Experience and more
 - To access MLToolkit, write to [MLToolkit@intersystems.com](mailto:MLToolkit@intersystems.com?subject=MLToolkit%20user%20group&body=Hello.%0A%0APlease%20add%20me%20to%20ML%20Toolkit%20user%20group%3A%0A%0A-%20GitHub%20username%3A%20%0A%0A-%20Name%3A%20%0A%0A-%20Company%3A%20%0A%0A-%20Position%3A%0A-%20Country%3A%20%0A%0A)
-
-## Related Sessions [↑](#contents)
-
-Don't forget to visit these sesions on the topics of AI/ML:
-
-- Monday
-  - BI and Analytics Roadmap (14:30)
-  - AI & ML Roundtable (15:30)
-  - NLP in Healthcare – Real-world Use Cases (16:30)
-- Tuesday
-  - Rapid Intelligent Application Development (14:30)
-  - An ML Toolkit for InterSystems IRIS (13:30)
-  - Introducing Analytic Workflows (16:30)
-- Wednesday
-  - Bright Colors & Predictive Maintenance (12:00)
-
-Recordings of these sessions would be available on [learning.intersystems.com](https://learning.intersystems.com).
-
-## Related Experience [↑](#contents)
-
-Don't forget to visit "Using AI Services to Build Intelligent Applications" experience at Mon 16:30 or Tue 16:30. 
 
 ## Reproducing the experience [↑](#contents)
 
