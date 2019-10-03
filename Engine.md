@@ -18,7 +18,7 @@
 
 ## Introduction [↑](#contents)
 
-The example we will use in this Experience Lab comes from the IoT industry. We have an engine with 45 sensors, data from which we receive periodically. The engine has two states which we must predict:
+The example we will use in this Experience Lab comes from the IoT industry. We have an engine (turbine) with 45 sensors, data from which we receive periodically. The engine has two states which we must predict:
 
 - 0 - normal operation
 - 1 - engine problems
