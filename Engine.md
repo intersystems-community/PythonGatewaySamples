@@ -1,4 +1,4 @@
-# MLToolkit Experience Lab
+# MLToolkit Exercises
 
 ## Contents
 
@@ -13,12 +13,12 @@
 - [Exercise 8. Further model improvements](#exercise-8-further-model-improvements-↑)
 - [Summary](#summary-↑)
 - [Links](#links-↑)
-- [Reproducing the experience](#reproducing-the-experience-↑)
+- [Reproducing the exercises](#reproducing-the-exercises-↑)
 - [Python](#python-↑)
 
 ## Introduction [↑](#contents)
 
-The example we will use in this Experience Lab comes from the IoT industry. We have an engine (turbine) with 45 sensors, data from which we receive periodically. The engine has two states which we must predict:
+The example we will use in these exercises comes from the IoT industry. We have an engine (turbine) with 45 sensors, data from which we receive periodically. The engine has two states which we must predict:
 
 - 0 - normal operation
 - 1 - engine problems
@@ -27,13 +27,13 @@ Note: The training dataset already contains the engine state, so we can train ou
 
 There is already an ML model that predicts the state of the engine, and InterSystems IRIS™ automatically validates and retrains the model if prediction quality falls below an adjustable threshold.
 
-The goals of this Experience Lab are for you to:
+The goals of these exercises are for you to:
 
 - See how automated AI/ML pipeline – an automated solution that produces predictions – works in InterSystems IRIS.
 - Improve the ML model predicting the state of the engine.
 
 
-In this Experience, you would encounter following technologies:
+In these exercises, you would encounter following technologies:
 
 - [InterSystems IRIS Data Platform](https://learning.intersystems.com/course/view.php?name=InterSystems%20IRIS%20QuickStart) - data platform to deliver multi-workload and multi-model data management, native interoperability, and an open analytics platform in a single product.
 - [Principal Component Analysis](https://en.wikipedia.org/wiki/Principal_component_analysis) - technique used to emphasize variation and bring out strong patterns in a dataset. It's often used to make data easy to explore and visualize.
@@ -140,7 +140,7 @@ In the screenshot, you can see that at the beginning there are no predictions to
 
 Before we continue, if you want to refresh your knowledge of [Principal Component Analysis](https://en.wikipedia.org/wiki/Principal_component_analysis) and [Logistic Regression](https://en.wikipedia.org/wiki/Logistic_regression) watch this [video](https://learning.intersystems.com/course/view.php?id=1182#section-1).
 
-Now let's move to the heart of our AI/ML production: `ml.engine.TrainProcess`. It is the core process of this Experience, as it trains a new predictive model from supplied data.
+Now let's move to the heart of our AI/ML production: `ml.engine.TrainProcess`. It is the core process of these exercises, as it trains a new predictive model from supplied data.
 In this exercise you'll explore activities composing `ml.engine.TrainProcess`. They contain Python code (which is sent to `isc.py.ens.Operation` for execution). Don't worry if you're not very familiar with Python. 
 Each activity has extended commentary explaining what's going on. Just follow it.
 
@@ -287,7 +287,7 @@ How might you further improve the model? Different algorithms and strategies can
 
 ## Summary [↑](#contents)
 
-In this Experience, we saw how the automated AI/ML pipeline works in InterSystems IRIS and tried data science by improving the model. 
+In these exercises, we saw how the automated AI/ML pipeline works in InterSystems IRIS and tried data science by improving the model. 
 
 Additionally we demonstrated that InterSystems IRIS:
 
@@ -302,19 +302,19 @@ Additionally we demonstrated that InterSystems IRIS:
 - [Presentation](http://meter.eduard.win/MLTExperience.pdf)
 - [PythonGateway](https://openexchange.intersystems.com/package/PythonGateway)
 - [RGateway](https://openexchange.intersystems.com/package/RGateway)
-- [PythonGateway Samples](https://github.com/intersystems-community/PythonGatewaySamples) – contains the code for this Experience and more
+- [PythonGateway Samples](https://github.com/intersystems-community/PythonGatewaySamples) – contains the code for these exercises and more
 - To access MLToolkit, write to [MLToolkit@intersystems.com](mailto:MLToolkit@intersystems.com?subject=MLToolkit%20user%20group&body=Hello.%0A%0APlease%20add%20me%20to%20ML%20Toolkit%20user%20group%3A%0A%0A-%20GitHub%20username%3A%20%0A%0A-%20Name%3A%20%0A%0A-%20Company%3A%20%0A%0A-%20Position%3A%0A-%20Country%3A%20%0A%0A)
 
-## Reproducing the experience [↑](#contents)
+## Reproducing the exercises [↑](#contents)
 
-If you want to run this experience on your own, you can:
+If you want to run these exercises on your own, you can:
 
   - Use docker: `docker run --rm -p 52773:52773 --name mlte intersystemscommunity/mlte:latest`
   - Install [PythonGateway Samples](https://github.com/intersystems-community/PythonGatewaySamples) on your host 
   
 ## Python [↑](#contents)
  
- The following Python classes are used in this Experience:
+ The following Python classes are used in these exercises:
  
 - [pandas.DataFrame](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html)
 - [sklearn.decomposition.PCA](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html) 
@@ -324,7 +324,7 @@ If you want to run this experience on your own, you can:
 - [matplotlib.figure.Figure](https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure)
 - [list](https://docs.python.org/3.6/tutorial/datastructures.html)
 
-The following Python functions are used in this Experience:
+The following Python functions are used in these exercises:
 
 - [cross_val_score](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_val_score.html)
 - [make_pipeline](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.make_pipeline.html)
