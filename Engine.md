@@ -59,7 +59,7 @@ First, let's get familiar with the production.
  
 On this page you will see the main components of the AI/ML production:
 
-- `py.ens.Operation` – Executes Python code and sends back the results.
+- `isc.py.ens.Operation` – Executes Python code and sends back the results.
 - `ml.engine.TrainProcess` – Trains a new prediction model.
 - `ml.engine.PredictService` – Receives information from engine sensors and sends it to `ml.engine.PredictProcess` to predict engine state. At the moment, `ml.engine.PredictService` is disabled (gray) and does not transfer data.
 - `ml.engine.PredictProcess` – Uses the ML model created by `ml.engine.TrainProcess` to predict engine state.
