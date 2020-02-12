@@ -24,6 +24,14 @@ h3 {
   <div id="content" style="width: 80%; margin: 0 auto;"></div>
   <script src="marked.min.js"></script>
   <script>
+  switch (navigator.language) {
+  case 'ru-RU':
+    var lang = 'RU';
+    break;
+  default:
+     var lang = '';
+}
+  
   xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -31,7 +39,7 @@ h3 {
         document.querySelectorAll("a").forEach(function(a) { if (a.attributes['href'].value[0] != '#') {a.target = "_blank"; }}); // Open links on new page.
     }
   }
-  xmlhttp.open("GET", "Engine.md", true);
+  xmlhttp.open("GET", "Engine"+ lang + ".md", true);
   xmlhttp.send(); 
   </script>
 </body>

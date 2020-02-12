@@ -13,7 +13,7 @@ RUN wget -q https://pm.community.intersystems.com/packages/zpm/latest/installer 
 COPY --chown=irisowner . $SRC_DIR
 
 COPY --chown=irisuser index.html $ISC_PACKAGE_INSTALLDIR/csp/user/index.html
-COPY --chown=irisuser Engine.md $ISC_PACKAGE_INSTALLDIR/csp/user/Engine.md
+COPY --chown=irisuser Engin*.md $ISC_PACKAGE_INSTALLDIR/csp/user/
 ADD --chown=irisuser https://strapdownjs.com/v/0.2/themes/united.min.css $ISC_PACKAGE_INSTALLDIR/csp/user/united.min.css
 ADD --chown=irisuser https://cdn.jsdelivr.net/npm/marked/marked.min.js $ISC_PACKAGE_INSTALLDIR/csp/user/marked.min.js
 
