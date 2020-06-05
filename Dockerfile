@@ -1,4 +1,5 @@
-FROM intersystemscommunity/irispy:latest
+ARG IMAGE=intersystemscommunity/irispy:latest
+FROM ${IMAGE}
 
 USER root
 
@@ -36,4 +37,5 @@ RUN iris start $ISC_PACKAGE_INSTANCENAME && \
   && rm -f $ISC_PACKAGE_INSTALLDIR/mgr/messages.log \
   && rm -rf $SRC_DIR/ml \
   && rm -rf $SRC_DIR/.git \
-  && rm -f $SRC_DIR/*.* $SRC_DIR/Dockerfile $SRC_DIR/LICENSE
+  && rm -f $SRC_DIR/*.* $SRC_DIR/Dockerfile $SRC_DIR/LICENSE \
+  && touch $ISC_PACKAGE_INSTALLDIR/mgr/messages.log
