@@ -48,17 +48,82 @@ Property Body As %Integer;
 /// travel destination
 Property Destination As %String;
 
-ClassMethod Fix()
+/// Test data transfer methods
+/// do ##class(ml.titanic.Passenger).Test()
+ClassMethod Test(count As %Integer = 100)
 {
-	
-	set key = ""
-	for {
-		set key=$order(^ml.titanic.PassengerD(key)) 
-		quit:key=""
-		for i=6,10 {
-			set $li(^ml.titanic.PassengerD(key), i) = +$tr($lg(^ml.titanic.PassengerD(key), i), ",", ".")
-		}
+	if count {
+		do ..%KillExtent()
+		do ..Import()
 	}
+	
+	write "Global structure:",!
+	zw ^ml.titanic.PassengerD(1)
+	
+	// Import now so it does not affect timings
+	set sc = ##class(isc.py.Main).ImportModule("pandas")
+	write:$$$ISERR(sc) $System.Status.GetErrorText(sc)
+
+	// All the ways to transfer data
+	set query = "SELECT * FROM ml_titanic.Passenger"
+	set class = "ml.titanic.Passenger"
+	set table = "ml_titanic.Passenger"
+	set global = "ml.titanic.PassengerD"
+	
+	// Common arguments
+	set variable = "df"
+	set type = "dataframe"
+	set start = 1
+	set end = $select(count>0:count, 1: $g(^ml.titanic.PassengerD, 1))
+
+	// Approach 0: ExecuteGlobal without arguments
+	set t1 = $zh
+	set sc = ##class(isc.py.Main).ExecuteGlobal(global, variable _ 0, type)
+	write:$$$ISERR(sc) $System.Status.GetErrorText(sc)
+	set t2 = $zh
+	write !,"global auto time: ", t2-t1,!
+	write ##class(isc.py.util.BPEmulator).DescribeDataframe(variable _ 0),!
+	
+	
+	/*
+	// Approach 1: ExecuteGlobal with arguments	
+	// for global transfer labels are not calculated automatically
+	set labels = $lb("globalKey", "Age", "Boat", "Body", "Cabin", "Class", "Destination", "Embarked", "Fare", "Name", "Parch", "Sex", "Sibsp", "Survived", "Ticket")
+
+	// mask is 1 element shorter than labels because "globalKey" is global subscript label
+	// Here we want to skip %%CLASSNAME field
+	set mask = "-++++++++++++++"
+	
+	set t1 = $zh
+	set sc = ##class(isc.py.Main).ExecuteGlobal(global, variable _ 1, type, start, end, mask, labels)
+	write:$$$ISERR(sc) $System.Status.GetErrorText(sc)
+	set t2 = $zh
+	write !,"global time: ", t2-t1,!
+	write ##class(isc.py.util.BPEmulator).DescribeDataframe(variable _ 1),!*/
+
+	// Approach 2: ExecuteClass
+	set t1 = $zh
+	set sc = ##class(isc.py.Main).ExecuteClass(class, variable _ 2, type, start, end)
+	write:$$$ISERR(sc) $System.Status.GetErrorText(sc)
+	set t2 = $zh
+	write !,"class time: ", t2-t1,!
+	write ##class(isc.py.util.BPEmulator).DescribeDataframe(variable _ 2),!
+	
+	// Approach 3: ExecuteTable
+	set t1 = $zh
+	set sc = ##class(isc.py.Main).ExecuteTable(table, variable _ 3, type, start, end)
+	write:$$$ISERR(sc) $System.Status.GetErrorText(sc)
+	set t2 = $zh
+	write !,"table time: ", t2-t1,!
+	write ##class(isc.py.util.BPEmulator).DescribeDataframe(variable _ 3),!
+	
+	// Approach 4: ExecuteTable
+	set t1 = $zh
+	set sc = ##class(isc.py.Main).ExecuteQuery(query, variable _ 4, type)
+	write:$$$ISERR(sc) $System.Status.GetErrorText(sc)
+	set t2 = $zh
+	write !,"query time: ", t2-t1,!
+	write ##class(isc.py.util.BPEmulator).DescribeDataframe(variable _ 4),!
 }
 
 Storage Default

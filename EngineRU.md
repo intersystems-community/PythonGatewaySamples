@@ -303,10 +303,12 @@ pca = PCA(n_components = 1 + mse.index(min(mse[1:])))
 
 ## Ссылки [↑](#содержание)
 
+- [Convergent Analytics](https://github.com/intersystems-community/Convergent-Analytics) - вебинары, статьи и демо сценарии для PythonGateway
 - [Презентация](http://meter.eduard.win/MLTExperience.pdf)
 - [PythonGateway](https://openexchange.intersystems.com/package/PythonGateway)
 - [RGateway](https://openexchange.intersystems.com/package/RGateway)
 - [PythonGatewaySamples](https://github.com/intersystems-community/PythonGatewaySamples) – содержит код этих упражнений и другие примеры.
+- [PythonGateway Template](https://openexchange.intersystems.com/package/PythonGateway-Template) - docker контейнер для работы с PythonGateway
 - Для получения доступа к MLToolkit, напишите нам на [MLToolkit@intersystems.com](mailto:MLToolkit@intersystems.com?subject=MLToolkit%20user%20group&body=Hello.%0A%0APlease%20add%20me%20to%20ML%20Toolkit%20user%20group%3A%0A%0A-%20GitHub%20username%3A%20%0A%0A-%20Name%3A%20%0A%0A-%20Company%3A%20%0A%0A-%20Position%3A%0A-%20Country%3A%20%0A%0A)
 
 ## Воспроизведение [↑](#содержание)

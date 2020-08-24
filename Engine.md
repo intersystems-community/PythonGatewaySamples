@@ -299,11 +299,14 @@ Additionally we demonstrated that InterSystems IRIS:
 
 ## Links [↑](#contents)
 
+- [Convergent Analytics](https://github.com/intersystems-community/Convergent-Analytics) - webinars, articles, user guide and demo cases for Python Gateway
 - [Presentation](http://meter.eduard.win/MLTExperience.pdf)
 - [PythonGateway](https://openexchange.intersystems.com/package/PythonGateway)
 - [RGateway](https://openexchange.intersystems.com/package/RGateway)
 - [PythonGateway Samples](https://github.com/intersystems-community/PythonGatewaySamples) – contains the code for these exercises and more
+- [PythonGateway Template](https://openexchange.intersystems.com/package/PythonGateway-Template) - docker container with PythonGateway
 - To access MLToolkit, write to [MLToolkit@intersystems.com](mailto:MLToolkit@intersystems.com?subject=MLToolkit%20user%20group&body=Hello.%0A%0APlease%20add%20me%20to%20ML%20Toolkit%20user%20group%3A%0A%0A-%20GitHub%20username%3A%20%0A%0A-%20Name%3A%20%0A%0A-%20Company%3A%20%0A%0A-%20Position%3A%0A-%20Country%3A%20%0A%0A)
+
 
 ## Reproducing the exercises [↑](#contents)
 
