@@ -1,0 +1,191 @@
+
+
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title>Recommendation Engine</title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+      <!-- JS, Popper.js, and jQuery -->
+      <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   </head>
+   <body class="bg-light">
+      <header>
+         <div class="collapse bg-dark" id="navbarHeader">
+            <div class="container">
+               <div class="row">
+                  <div class="col-sm-8 col-md-7 py-4">
+                     <h4 class="text-white">About</h4>
+                     <p class="text-muted">InterSystems IRIS Image Search Demo</p>
+                  </div>
+                  <div class="col-sm-4 offset-md-1 py-4">
+                     <h4 class="text-white">Links</h4>
+                     <ul class="list-unstyled">
+                        <li><a href="/csp/sys/%25CSP.Portal.Home.zen" class="text-white">Management Portal</a></li>
+                        <li><a href="https://github.com/intersystems-community/PythonGatewaySamples/" class="text-white">Repository</a></li>
+                        <li><a href="mailto:mltoolkit@intersystems.com" class="text-white">Email us</a></li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="navbar navbar-dark bg-dark shadow-sm">
+            <div class="container d-flex justify-content-between">
+               <a href="#" class="navbar-brand d-flex align-items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="mr-2" viewBox="0 0 24 24" focusable="false">
+                     <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                     <circle cx="12" cy="13" r="4"/>
+                  </svg>
+                  <strong>Recommendation Engine</strong>
+               </a>
+               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+               <span class="navbar-toggler-icon"></span>
+               </button>
+            </div>
+         </div>
+      </header>
+      <div class="container">
+         <div class="row">
+            <hr>
+         </div>
+         <div class="row">
+            <div id="photo" class="col-md-4 order-md-2 mb-4">
+               <h4 class="d-flex justify-content-between align-items-center mb-3">
+                  <span class="text-muted">Your photo</span>
+               </h4>
+               <ul class="list-group mb-3">
+                  <li class="list-group-item d-flex justify-content-center lh-condensed">
+                     <div class="media">
+                        <!-- PHOTO HERE-->
+                        <img id="preview" style="max-width:300px;" width="100%" class="align-self-center mr-3"/>
+                     </div>
+                  </li>
+               </ul>
+            </div>
+            <div class="col-md-8 order-md-1">
+               <form>
+                  <div class="row">
+                     <div class="col-md-6 mb-3">
+                        <h4 class="d-flex justify-content-between align-items-center mb-3">
+                           <span class="text-muted">Chose your photo to upload</span>
+                        </h4>
+                        <input onchange="previewFile(this);"  type="file" class="form-control" name="file" id="file" placeholder="" value="" required>
+                     </div>
+                  </div>
+                  <button class="btn btn-primary btn-lg btn-block" type="submit" onclick="fun()">Upload</button>
+               </form>
+            </div>
+         </div>
+         <div class="row">
+            <hr>
+         </div>
+         <div id="resultsAll">
+            <div id="results" class="row">
+               <div class="col-md-4">
+                  <div class="card mb-4 shadow-sm">
+                     <img width="100%" id="img0"/>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div class="card mb-4 shadow-sm">
+                     <img width="100%" id="img1"/>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div class="card mb-4 shadow-sm">
+                     <img width="100%" id="img2"/>
+                  </div>
+               </div>
+            </div>
+            <div id="results" class="row">
+               <div class="col-md-4">
+                  <div class="card mb-4 shadow-sm">
+                     <img width="100%" id="img3"/>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div class="card mb-4 shadow-sm">
+                     <img width="100%" id="img4"/>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div class="card mb-4 shadow-sm">
+                     <img width="100%" id="img5"/>
+                  </div>
+               </div>
+            </div>
+            <div id="results" class="row">
+               <div class="col-md-4">
+                  <div class="card mb-4 shadow-sm">
+                     <img width="100%" id="img6"/>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div class="card mb-4 shadow-sm">
+                     <img width="100%" id="img7"/>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div class="card mb-4 shadow-sm">
+                     <img width="100%" id="img8"/>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <script type="text/javascript">
+         function previewFile(input) {
+         
+           var file = $("#file").get(0).files[0];
+           if (file) {
+             var reader = new FileReader();
+             reader.onload = function() {
+               $("#preview").attr("src", reader.result);
+             }
+             reader.readAsDataURL(file);
+           }
+         }
+         
+         $(document).ready(function(){
+             previewFile($('#file'));
+             $('#resultsAll').hide();
+         });
+         
+         	
+         function fun() {
+                 $("form").submit(function(evt) {
+                 evt.preventDefault();
+                 var formData = new FormData($(this)[0]);
+         
+                 $.ajax({
+                       url: '/cam/imgUpload',
+                       type: 'POST',
+                       data: formData,
+                       //async: false,
+                       cache: false,
+                       contentType: false,
+                       enctype: 'multipart/form-data',
+                       processData: false,
+         
+                       success: function(response) {
+                           document.getElementById("img0").src = response.image0;
+                           document.getElementById("img1").src = response.image1;
+                           document.getElementById("img2").src = response.image2;
+                           document.getElementById("img3").src = response.image3;
+                           document.getElementById("img4").src = response.image4;
+                           document.getElementById("img5").src = response.image5;
+                           document.getElementById("img6").src = response.image6;
+                           document.getElementById("img7").src = response.image7;
+                           document.getElementById("img8").src = response.image8;
+                           $('#resultsAll').show();  
+                       		 }
+                    		});
+                    return false;
+                  })};
+      </script>
+   </body>
+</html>
+
