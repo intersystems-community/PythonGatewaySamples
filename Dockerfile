@@ -3,7 +3,22 @@ FROM ${IMAGE}
 
 USER root
 
-RUN pip install sklearn
+RUN apt-get update && apt-get install -y --no-install-recommends p7zip-full g++ \
+	&& rm -rf /var/lib/apt/lists/*
+
+RUN pip install sklearn tensorflow tensorflow_hub annoy
+
+USER irisuser
+
+ENV PHOTO_DIR=$ISC_PACKAGE_INSTALLDIR/photo
+RUN mkdir -p $PHOTO_DIR
+
+USER irisuser:irisowner
+
+RUN wget -q http://vision.cs.utexas.edu/projects/finegrained/utzap50k/ut-zap50k-images.zip  -O /tmp/ut-zap50k-images.zip
+RUN 7z x /tmp/ut-zap50k-images.zip -o$PHOTO_DIR
+RUN chmod -R a+rX $PHOTO_DIR
+RUN rm /tmp/ut-zap50k-images.zip
 
 USER irisowner
 
@@ -14,6 +29,7 @@ RUN wget -q https://pm.community.intersystems.com/packages/zpm/latest/installer 
 COPY --chown=irisowner . $SRC_DIR
 
 COPY --chown=irisuser index.html $ISC_PACKAGE_INSTALLDIR/csp/user/index.html
+COPY --chown=irisuser recommend.html $ISC_PACKAGE_INSTALLDIR/csp/user/recommend.html
 COPY --chown=irisuser Engin*.md $ISC_PACKAGE_INSTALLDIR/csp/user/
 ADD --chown=irisuser https://strapdownjs.com/v/0.2/themes/united.min.css $ISC_PACKAGE_INSTALLDIR/csp/user/united.min.css
 ADD --chown=irisuser https://cdn.jsdelivr.net/npm/marked/marked.min.js $ISC_PACKAGE_INSTALLDIR/csp/user/marked.min.js
@@ -24,7 +40,7 @@ RUN iris start $ISC_PACKAGE_INSTANCENAME && \
             " zn \"PYTHON\"" \
             " do \$system.OBJ.ImportDir(\"$SRC_DIR/ml\", \"*.cls\", \"ck\", , 1)" \
             " do \$system.OBJ.ImportDir(\"$SRC_DIR/\", \"*.xml\", \"ck\")" \
-            " do ##class(ml.Installer).ConfigureProduction()" \
+            " set sc = ##class(ml.Installer).Setup()" \
             " zpm \"install dsw\"" \
             " halt" \
     | iris session $ISC_PACKAGE_INSTANCENAME && \

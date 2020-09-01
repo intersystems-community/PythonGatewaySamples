@@ -6,11 +6,9 @@ XData Install [ XMLNamespace = INSTALLER ]
 {
 <Manifest>
   <Default Name="NAMESPACE" Value="PYTHON"/>
-  <Default Name="DBNAME" Value="${NAMESPACE}"/>
   <Default Name="SOURCESPATH" Dir='#{$system.Util.GetEnviron("SRC_DIR")}' />
-  <Default Name="RESOURCE" Value="%DB_${DBNAME}" /> 
   <Namespace Name="${NAMESPACE}" Create="no">
-    <Import File="${SOURCESPATH}ml" Recurse="1"/>
+    <!--<Import File="${SOURCESPATH}ml" Recurse="1"/>-->
     
     <Log Level="1" Text="Configuring Production"/>
     <Invoke Class="ml.Installer" Method="ConfigureProduction" CheckStatus="true"/>

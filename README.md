@@ -23,6 +23,9 @@ pip install numpy
 pip install matplotlib
 pip install sklearn
 pip install seaborn
+pip install tensorflow
+pip install tensorflow_hub
+pip install annoy
 ```
 6. Open and start `ml.Production`.
 
@@ -38,7 +41,7 @@ Using [Dedupe](https://docs.dedupe.io/en/latest/) or [RLTK](https://rltk.readthe
 
 We start with working self-correcting model used for predictive maintenance. First, we see how production elements work together and how our transactional processes can benefit from AI/ML models. After that we’d improve the model and see how this change propagates through production. Finally, we’ll explore different applications of this architecture. 
 
- ### Walkthrough 
+### Walkthrough 
 
 We want to do predictive maintenance on engines. Dataset: we store information about one specific engine. We get a large array of sensor data every second. Historic data is already in the dataset. Check [Engine.md](Engine.md) for a step-by-step walkthrough. Note that GitHub does not render base64 embedded images, so you'll need a separate markdown viewer.
 
@@ -64,3 +67,21 @@ Start `Predict Service` and `Check Service` to see model be automatically retrai
 - Fit - [pipeline](https://www.kaggle.com/baghern/a-deep-dive-into-sklearn-pipelines) creation and training
 
 
+## Sample 3. Image Search engine
+
+Do not forget to switch into `Cam` category.
+
+### Host setup
+
+1. Download and unpack any image dataset, for example [this](http://vision.cs.utexas.edu/projects/finegrained/utzap50k/ut-zap50k-images.zip).
+2. Load dataset into InterSystems IRIS: `zw ##class(ml.cam.data.Photo).LoadDir(<dir>)`.
+3. Restart production, it will resend initial trainig request.
+4. Training will take between 10 minutes to 5 hours depending on your CPU/GPU.
+5. Trainig process saves search index automatically so subsequent runs will take <1 minute.
+6. Copy `recommend.html` to any web application.
+7. Create new unauthenticated REST app named `/cam` with `ml.cam.rest.Main` dispatch class.
+8. Open `recommend.html` in browser and send your test image
+
+### Docker setup
+
+To preserve index mount volume to the `/usr/irissys/mgr/Temp` directory. `docker-compose.yml` contains an example.

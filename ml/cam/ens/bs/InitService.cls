@@ -6,6 +6,10 @@ Parameter ADAPTER = "Ens.InboundAdapter";
 
 Property Adapter As Ens.InboundAdapter;
 
+Property IndexSize As %Integer [ InitialExpression = 1000 ];
+
+Parameter SETTINGS = "IndexSize:ML";
+
 Method OnProcessInput(pInput As %RegisteredObject, Output pOutput As %RegisteredObject) As %Status [ CodeMode = expression ]
 {
 $$$OK
@@ -24,7 +28,12 @@ Method OnInit() As %Status
 	set req.IdVariable = "imagesIds"
 	
 	set ids = ""
-	for id=1:1:$g(^ml.cam.ens.msg.LoaderRequestD, 1) {
+	
+	set maxId = $g(^ml.cam.ens.msg.LoaderRequestD, 1)
+	
+	set:(..IndexSize>maxId) ..IndexSize = maxId
+	
+	for id=1:1:..IndexSize { 
 		set ids = ids _ $lb(id)
 	}
 	set req.PhotoIds = $lts(ids)
