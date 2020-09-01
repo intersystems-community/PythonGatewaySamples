@@ -13,9 +13,9 @@ XData Install [ XMLNamespace = INSTALLER ]
     <Log Level="1" Text="Configuring Production"/>
     <Invoke Class="ml.Installer" Method="ConfigureProduction" CheckStatus="true"/>
     <Invoke Class="ml.Installer" Method="CreateWebApp" CheckStatus="true"/>
-    <Invoke Class="ml.cam.data.Photo" Method="LoadDir" CheckStatus="true">
+    <!--<Invoke Class="ml.cam.data.Photo" Method="LoadDir" CheckStatus="true">
     <Arg Value='#{$system.Util.GetEnviron("PHOTO_DIR")}'/>
-    </Invoke>
+    </Invoke>-->
   </Namespace>
 </Manifest>
 }
@@ -77,8 +77,9 @@ ClassMethod CreateWebApp()
 	new $namespace
 	set cspProperties("AutheEnabled") = $$$AutheUnauthenticated
 	set cspProperties("NameSpace") = $namespace
-	set cspProperties("IsNameSpaceDefault") = $$$YES
+	set cspProperties("IsNameSpaceDefault") = $$$NO
 	set cspProperties("DispatchClass") =  "ml.cam.rest.Main"
+	set cspProperties("MatchRoles")=":%DB_PYTHON"
 	
 	set $namespace = "%SYS"
 	set sc = ##class(Security.Applications).Create("/cam", .cspProperties)

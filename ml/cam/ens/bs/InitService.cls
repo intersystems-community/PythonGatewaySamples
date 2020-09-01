@@ -22,6 +22,11 @@ Method OnInit() As %Status
 	hang:$system.Util.GetEnviron("ISC_PACKAGE_INSTALLDIR")="/usr/irissys" 60
 	$$$TRACE("INIT")
 	
+	if $d(^ml.cam.data.PhotoD(1))=0 {
+		set sc = ##class(ml.cam.data.Photo).LoadDir($system.Util.GetEnviron("PHOTO_DIR"))
+		$$$TRACE("LOADED PHOTOS")
+	}
+	
 	set req = ##class(ml.cam.ens.msg.LoaderRequest).%New()
 	
 	set req.Variable = "features"
@@ -29,7 +34,7 @@ Method OnInit() As %Status
 	
 	set ids = ""
 	
-	set maxId = $g(^ml.cam.ens.msg.LoaderRequestD, 1)
+	set maxId = $g(^ml.cam.data.PhotoD, 1)
 	
 	set:(..IndexSize>maxId) ..IndexSize = maxId
 	

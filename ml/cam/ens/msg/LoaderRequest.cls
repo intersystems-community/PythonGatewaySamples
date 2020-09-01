@@ -1,4 +1,4 @@
-Class ml.cam.ens.msg.LoaderRequest Extends %Persistent
+Class ml.cam.ens.msg.LoaderRequest Extends (%Persistent, Ens.Request)
 {
 
 /// Comma-separated Photo Ids

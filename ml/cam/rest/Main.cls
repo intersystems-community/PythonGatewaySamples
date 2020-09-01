@@ -57,6 +57,7 @@ ClassMethod PhotoUpload() As %Status
 	
 	set sc = ..InvoceHostSync(processName, req, .resp, timeout, serviceName)
 	quit:$$$ISERR(sc) sc
+	quit:'$isObject(resp) $$$ERROR($$$GeneralError, "Timeout")
 	
 	#dim resp As ml.cam.ens.msg.MatchesResponse
 	

@@ -1,0 +1,10 @@
+recordlinkage
+dedupe
+pandas
+numpy
+matplotlib
+sklearn
+seaborn
+tensorflow
+tensorflow_hub
+annoy

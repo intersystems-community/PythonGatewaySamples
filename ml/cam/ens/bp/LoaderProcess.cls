@@ -143,7 +143,7 @@ for (f) in full_filenames:
 #{process.%request.Variable}.extend(im(images))
    
 # Back with a regular stderr
-sys.stdout = old_stderr
+sys.stderr = old_stderr
 
 del images, n, data, decoded, resized, normalized, f, full_filenames, old_stderr, mystderr
 ]]></annotation>
