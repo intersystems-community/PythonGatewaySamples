@@ -41,7 +41,8 @@ XData ProductionDefinition
     <Setting Target="Host" Name="Width">299</Setting>
     <Setting Target="Host" Name="Matches">9</Setting>
   </Item>
-  <Item Name="ml.cam.ens.bs.InitService" Category="Cam" ClassName="ml.cam.ens.bs.InitService" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
+  <Item Name="ml.cam.ens.bs.InitService" Category="Cam" ClassName="ml.cam.ens.bs.InitService" PoolSize="1" Enabled="false" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
+    <Setting Target="Host" Name="IndexSize">30169</Setting>
   </Item>
 </Production>
 }
