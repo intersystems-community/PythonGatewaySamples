@@ -19,7 +19,7 @@ $$$OK
 Method OnInit() As %Status
 {
 	// We're inside the container. Let's wait a little.
-	hang:$system.Util.GetEnviron("ISC_PACKAGE_INSTALLDIR")="/usr/irissys" 60
+	//hang:$system.Util.GetEnviron("ISC_PACKAGE_INSTALLDIR")="/usr/irissys" 60
 	$$$TRACE("INIT")
 	
 	if $d(^ml.cam.data.PhotoD(1))=0 {
