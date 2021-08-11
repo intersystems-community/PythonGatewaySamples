@@ -1,4 +1,4 @@
-ARG IMAGE=intersystemscommunity/irispy:latest
+ARG IMAGE=intersystemsdc/irispy:latest
 FROM ${IMAGE}
 
 USER root
